@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+    <html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>숫자야구게임</title>
+        <style>
+            .a {
+                text-align: center;
+            }
+            input {
+                width: 50px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>숫자야구게임</h1>
+        <p>9회만에 맞추십시오!</p>
+        <div>
+            <label for=""></label>
+            <input type="text" id="num1">
+            <label for=""></label>
+            <input type="text" id="num2">
+            <label for=""></label>
+            <input type="text" id="num3">
+            <button onclick="calc()">입력</button>
+            <br><br>
+        </div>
+        
+        <div id="result">
+        </div>
+
+        <div class="container">
+            <script>
+                var rArr = new Array(3);
+                var myArr = new Array(3);
+                var str = "";
+                var s = 0;
+                var b = 0;
+                var cnt = 0;
+            
+                 for(var i=0; i<3; i++) {
+                    rArr[i] = parseInt(Math.random()*9+1);
+                    for(var z=0; z<i; z++) {
+                        if(rArr[i]==rArr[z])
+                            i--;
+                    }
+                }
+            
+                function calc() {
+                    cnt++;
+                   myArr[0] = document.getElementById("num1").value;
+                   myArr[1] = document.getElementById("num2").value;
+                   myArr[2] = document.getElementById("num3").value;
+                //    result.innerHTML = myArr[0] + myArr[1] + myArr[2];
+                   for(var i=0; i<3; i++) {
+                        for(var z=0; z<3; z++) {
+                            if(myArr[i] == rArr[z]) {
+                                if(i==z) {
+                                    s++;
+                                } else {
+                                    b++;
+                                }
+                            }
+                        }
+                    }
+                str += "<" + cnt + "회> <br>";
+                str += "입력 : " + myArr[0] + ", " + myArr[1] +  ", " + + myArr[2] + "<br> 결과 : " + 'S : ' + s + ' / B : ' + b + ' / O : ' + (3-s-b) + "<br><br>";
+                result.innerHTML = str;
+
+                if(s==3) {
+                    alert('정답!!');
+                    document.write('<h1>축하드립니다!!</h1>')
+                }
+
+                if(cnt==9) {
+                    alert('실패!!');
+                    window.location.reload();
+                }
+
+                
+
+                s = 0;
+                b = 0;
+                for(var i=0; i<3; i++) {
+                    myArr[i] = 0;
+                }
+                }
+
+                
+            </script>
+        </div>
+    </body>
+</html>
